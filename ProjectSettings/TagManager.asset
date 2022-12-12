@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Lounge
+  - WaitingArea
+  - Home
+  - Door
+  - Office
+  - Cubicle
+  - Reception
+  - Toilet
+  - Puddle
   layers:
   - Default
   - TransparentFX
@@ -13,7 +22,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - Floor
   - 
   - 
   - 

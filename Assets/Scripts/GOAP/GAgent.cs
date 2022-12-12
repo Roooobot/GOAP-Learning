@@ -7,9 +7,9 @@ using System.Linq;
 public class SubGoal
 {
     public Dictionary<string, int> sgoals;
-    //用于判断该子目标是否要移除
+    //用于判断该子目标在被完成一次后是否要移除
     public bool remove;
-
+    // int 值代表该子目标的优先度，数值越高，优先度越高
     public SubGoal(string s, int i, bool r)
     {
         sgoals = new Dictionary<string, int>();
@@ -34,6 +34,7 @@ public class GAgent : MonoBehaviour
     //当前要达成的目标
     SubGoal currentGoal;
 
+    Vector3 destination = Vector3.zero;
     public void Start()
     {
         //获取所有的 Action 脚本，并存放到 actions 列表
@@ -56,7 +57,9 @@ public class GAgent : MonoBehaviour
     {
         if (currentAction != null && currentAction.running)
         {
-            if (currentAction.agent.hasPath && currentAction.agent.remainingDistance < 1f)
+            float distanceToTarget = Vector3.Distance(destination, this.transform.position);
+            //Debug.Log(currentAction.agent.hasPath + " " + distanceToTarget);
+            if (distanceToTarget < 2f)
             {
                 if (!invoked)
                 {
@@ -100,10 +103,18 @@ public class GAgent : MonoBehaviour
                 if (currentAction.target == null && currentAction.targetTag != "")
                     currentAction.target = GameObject.FindWithTag(currentAction.targetTag);
 
-                if (currentAction.targetTag != null)
+                if (currentAction.target != null)
                 {
                     currentAction.running = true;
-                    currentAction.agent.SetDestination(currentAction.target.transform.position);
+
+                    destination = currentAction.target.transform.position;
+                    Transform dest = currentAction.target.transform.Find("Destination");
+                    if (dest != null)
+                    {
+                        destination = dest.position;
+                    }
+
+                    currentAction.agent.SetDestination(destination);
                 }
             }
             else

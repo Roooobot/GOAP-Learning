@@ -50,7 +50,7 @@ public class GPlanner
         //如果没有计划则返回
         if (!success)
         {
-            Debug.Log("NO PLAN");
+            //Debug.Log("NO PLAN");
             return null;
         }
         //在所有分支中找到 消耗最小的那条链路
@@ -84,11 +84,11 @@ public class GPlanner
         {
             queue.Enqueue(a);
         }
-        Debug.Log("The Plan is: ");
-        foreach (GAction a in queue)
-        {
-            Debug.Log("Q:" + a.actionName);
-        }
+        //Debug.Log("The Plan is: ");
+        //foreach (GAction a in queue)
+        //{
+        //    Debug.Log("Q:" + a.actionName);
+        //}
         return queue;
     }
     #region BuildGraph()利用递归构建 Action 计划树

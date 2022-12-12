@@ -2493,6 +2493,8 @@ GameObject:
   - component: {fileID: 2119782815294552297}
   - component: {fileID: 3108197780774181083}
   - component: {fileID: 438238121}
+  - component: {fileID: 438238122}
+  - component: {fileID: 576518823}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -2597,7 +2599,7 @@ MonoBehaviour:
     value: 0
   afterEffects:
   - key: isWaiting
-    value: 1
+    value: 0
   agent: {fileID: 0}
   running: 0
 --- !u!114 &2119782815294552297
@@ -2619,10 +2621,10 @@ MonoBehaviour:
   duration: 5
   preConditions:
   - key: hasArrived
-    value: 1
+    value: 0
   afterEffects:
   - key: hasRegistered
-    value: 2
+    value: 0
   agent: {fileID: 0}
   running: 0
 --- !u!114 &3108197780774181083
@@ -2654,12 +2656,66 @@ MonoBehaviour:
   cost: 1
   target: {fileID: 0}
   targetTag: 
-  duration: 0
+  duration: 5
   preConditions:
   - key: atHospital
     value: 0
   afterEffects:
   - key: isTreated
+    value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &438238122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8073607139871639860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a293c5f0d15bfbc429c97ebcb14b7eca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: GoHome
+  cost: 1
+  target: {fileID: 0}
+  targetTag: Home
+  duration: 0
+  preConditions:
+  - key: isCured
+    value: 0
+  afterEffects:
+  - key: isHome
+    value: 0
+  agent: {fileID: 0}
+  running: 0
+--- !u!114 &576518823
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8073607139871639860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d8e4422691a2245bf020181cb3e856, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionName: Go To Toilet
+  cost: 1
+  target: {fileID: 0}
+  targetTag: 
+  duration: 5
+  preConditions:
+  - key: FreeToilet
+    value: 0
+  - key: busting
+    value: 0
+  - key: atHospital
+    value: 0
+  afterEffects:
+  - key: relief
     value: 0
   agent: {fileID: 0}
   running: 0

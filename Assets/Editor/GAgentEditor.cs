@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 [CustomEditor(typeof(GAgentVisual))]
 [CanEditMultipleObjects]
-public class GAgentVisualEditor : Editor 
+public class GAgentVisualEditor : Editor
 {
 
 
@@ -18,7 +18,7 @@ public class GAgentVisualEditor : Editor
     {
         DrawDefaultInspector();
         serializedObject.Update();
-        GAgentVisual agent = (GAgentVisual) target;
+        GAgentVisual agent = (GAgentVisual)target;
         GUILayout.Label("Name: " + agent.name);
         GUILayout.Label("Current Action: " + agent.gameObject.GetComponent<GAgent>().currentAction);
         GUILayout.Label("Actions: ");
@@ -41,6 +41,19 @@ public class GAgentVisualEditor : Editor
             foreach (KeyValuePair<string, int> sg in g.Key.sgoals)
                 GUILayout.Label("=====  " + sg.Key);
         }
+        GUILayout.Label("Beliefs: ");
+        foreach (KeyValuePair<string, int> sg in agent.gameObject.GetComponent<GAgent>().beliefs.GetStates())
+        {
+            GUILayout.Label("=====  " + sg.Key);
+        }
+
+        GUILayout.Label("Inventory: ");
+        foreach (GameObject g in agent.gameObject.GetComponent<GAgent>().inventory.items)
+        {
+            GUILayout.Label("====  " + g.tag);
+        }
+
+
         serializedObject.ApplyModifiedProperties();
     }
 }
